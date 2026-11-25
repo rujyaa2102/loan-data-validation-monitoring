@@ -39,11 +39,21 @@ The system validates loan records stored in a MySQL database and detects common 
 
 ## System Architecture
 
-Loan Data → MySQL Database → Bash Validation Script → Validation Logs & Reports → SFTP Transfer
+## System Architecture
 
-Cron Scheduler automates script execution.
-
-Flask REST API provides monitoring information.
+```mermaid
+flowchart TD
+    A[Cron Scheduler] --> B[validate.sh]
+    B --> C[MySQL Database]
+    C --> D[Data Validation]
+    D --> E[Validation Report]
+    D --> F[Application Logs]
+    E --> G[send_report.sh]
+    G --> H[SFTP Server]
+    F --> I[Flask Monitoring API]
+    I --> J[/health Endpoint]
+    I --> K[/status Endpoint]
+    K --> L[Postman Testing]
 
 ## Project Structure
 
